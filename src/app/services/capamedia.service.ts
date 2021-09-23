@@ -13,7 +13,7 @@ export class CapamediaService {
   constructor(private _http: HttpClient) { }
 
   /*USUARIO*/
-  getUsuarionTodo(){
+  getUsuarioTodo(){
     return this._http.get(`${this.API_URI}/usuario/todo`);
   }
 
