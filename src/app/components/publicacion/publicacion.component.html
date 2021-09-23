@@ -1,1 +1,29 @@
-<p>publicacion works!</p>
+<!-- <div class="row"> -->
+<div class="col-md-4 offset-md-4">
+    <div class="card">
+        <div class="card text-center">
+          <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center " >Nueva Publicación</div>
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <input [(ngModel)]="publicacion.titulo" type="text" name="titulo" placeholder="Título" class="form-control"  autofocus>
+                </div>
+                <div class="form-group">
+                    <select [(ngModel)]="publicacion.catedratico" name="catedratico" class="form-select mt-2">
+                        <option *ngFor="let cat of listaCatedratico" value={{cat.catedratico}}>{{cat.nombre}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select [(ngModel)]="publicacion.curso" name="curso" class="form-select mt-2">
+                        <option *ngFor="let cur of listaCurso" value={{cur.curso}}>{{cur.nombre}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea [(ngModel)]="publicacion.texto" type="text" name="texto" placeholder="Texto" class="form-control mt-2" rows="5"></textarea>
+                </div>
+                <button class="btn btn-success col-md-8 offset-md-0 mt-2" (click)="savePublicacion()">Guardar Publicación</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- </div> -->

@@ -1,4 +1,4 @@
-<div class="col-md-12" *ngFor="let publicacion of publicaciones">
+<div class="col-md-4 offset-md-4" *ngFor="let publicacion of publicaciones">
   <div class="card text-center">
     <div
       class="
@@ -17,7 +17,7 @@
         >Curso: {{ publicacion.nombrecurso }}</span
       >
       &nbsp;
-      <a href="">{{ publicacion.titulo }}</a>
+      <a href="/publicacion/{{publicacion.publicacion}}">{{ publicacion.titulo }}</a>
     </div>
     <div class="card-body">
       Creado por {{ publicacion.nombreusuario }} {{ publicacion.apellido }} el
