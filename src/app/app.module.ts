@@ -10,6 +10,7 @@ import { PublicacionComponent } from './components/publicacion/publicacion.compo
 import { UsuarioComponent } from './components/usuario/usuario.component';
 
 import { CapamediaService } from './services/capamedia.service';
+import { PublicacionesComponent } from './components/publicaciones/publicaciones.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { CapamediaService } from './services/capamedia.service';
     LoginComponent,
     NavbarComponent,
     PublicacionComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    PublicacionesComponent
   ],
   imports: [
     BrowserModule,
