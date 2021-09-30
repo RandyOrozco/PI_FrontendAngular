@@ -3,6 +3,9 @@ import { CapamediaService } from '../../services/capamedia.service';
 import { Catedratico } from '../../models/catedratico';
 import { Curso } from '../../models/curso';
 import { Publicacion } from '../../models/publicacion';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpParams } from '@angular/common/http';
+import { Lexer } from '@angular/compiler';
 
 @Component({
   selector: 'publicacion',
@@ -23,14 +26,61 @@ export class PublicacionComponent implements OnInit {
     texto: '',
   };
 
-  constructor(private _capamediaService: CapamediaService) {}
+  pActual: any;
+  publicacionActual: Publicacion = {
+    usuario: 1,
+    curso: 0,
+    catedratico: 0,
+    titulo: '',
+    texto: '',
+  };
+  resultados: any = [];
+
+  constructor(
+    private _capamediaService: CapamediaService,
+    //private _router: Router,
+    private _route: ActivatedRoute,
+    private _router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getListaCatedratico();
     this.getListaCurso();
+    this.getPost();
+    //this.pActual = this._route.snapshot.params;
+    
+  }
+  
+  getPost() {
+    this._route.paramMap.subscribe((params) => {
+      this.pActual = JSON.parse(params.get('publicacion') || '');
+      if (this.pActual) {
+        console.log(this.pActual);
+        this._capamediaService.getPublicacionUno(this.pActual).subscribe(
+          res => {
+             this.resultados = res;
+            //console.log(res);
+            //console.log(JSON.parse(JSON.stringify(res)));
+            //console.log(res);
+            //this.publicacionActual.catedratico = JSON.stringify(res).catedratico;
+          },
+          err => {
+            console.log(err);
+          }
+        );
+      } else {
+      }
+    });
+  }
+
+  leer() {
+    console.log('hola mundo');
+
+    console.log(this.resultados);
   }
 
   getListaCatedratico() {
+    this.leer();
     this._capamediaService.getCatedraticoTodo().subscribe(
       (res) => {
         this.listaCatedratico = <Catedratico[]>res;
@@ -56,7 +106,7 @@ export class PublicacionComponent implements OnInit {
     this._capamediaService.savePublicacion(this.publicacion).subscribe(
       (res) => {
         console.log(res);
-        
+        this._router.navigate(['/publicaciones']);
       },
       (err) => console.log(err)
     );

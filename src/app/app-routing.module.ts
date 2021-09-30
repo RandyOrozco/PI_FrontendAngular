@@ -25,6 +25,10 @@ const routes: Routes = [
     component: PublicacionesComponent,
   },
   {
+    path: 'publicacion/',
+    component: PublicacionComponent,
+  },
+  {
     path: 'publicacion/:publicacion',
     component: PublicacionComponent,
   },
