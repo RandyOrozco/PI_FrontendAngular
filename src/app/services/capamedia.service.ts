@@ -5,16 +5,45 @@ import { Catedratico } from '../models/catedratico';
 import { Curso } from '../models/curso';
 import { Publicacion } from '../models/publicacion';
 import { Observable } from 'rxjs/Observable';
+import { RESTORED_VIEW_CONTEXT_NAME } from '@angular/compiler/src/render3/view/util';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CapamediaService {
 
+  public CONST_USUARIO = 'usuario';
+  public CONST_PUBLICACION = 'publicacion';
+
   private API_URI = 'http://127.0.0.1:8080/api';
   constructor(private _http: HttpClient) { }
 
+  /* LOCAL STORAGE */
+  LSSetValue(nombre: string, valor: string){
+    localStorage.setItem(nombre, valor);
+  }
+
+  LSGetValue(nombre: string): any{
+    const retorno = localStorage.getItem(nombre);
+    console.log(retorno);
+    return retorno;
+  }
+
+  LSRemoveValue(nombre: string): any{
+    localStorage.removeItem(nombre);
+  }
+
   /*USUARIO*/
+  loginUsuario(login: any){
+    const retorno = this._http.post(`${this.API_URI}/usuario/login`, login);
+
+    /*console.log('loginUsuario');
+    
+    console.log(retorno);*/
+    
+    return retorno;
+  }
+
   getUsuarioTodo(){
     return this._http.get(`${this.API_URI}/usuario/todo`);
   }

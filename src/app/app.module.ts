@@ -12,6 +12,7 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
 
 import { CapamediaService } from './services/capamedia.service';
 import { PublicacionesComponent } from './components/publicaciones/publicaciones.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,10 @@ import { PublicacionesComponent } from './components/publicaciones/publicaciones
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule/*,
+    RouterModule.forRoot([
+      {path: 'dashboard', component:NavbarComponent}
+    ],{ onSameUrlNavigation: 'reload' })*/
   ],
   providers: [CapamediaService],
   bootstrap: [AppComponent]
