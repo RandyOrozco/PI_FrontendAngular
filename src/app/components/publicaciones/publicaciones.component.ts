@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CapamediaService } from '../../services/capamedia.service';
 
 @Component({
@@ -10,7 +11,12 @@ export class PublicacionesComponent implements OnInit {
 
   publicaciones: any = [];
 
-  constructor(private _capamediaService: CapamediaService) {
+  constructor(
+    private _capamediaService: CapamediaService,
+    //private _router: Router,
+    private _route: ActivatedRoute,
+    private _router: Router
+  ) {
 
   }
 
@@ -25,5 +31,13 @@ export class PublicacionesComponent implements OnInit {
       
       
     );
+  }
+
+  verUsuario(usuario: string){
+    this._capamediaService.LSSetValue(
+      this._capamediaService.CONST_USUARIO_CONSULTA,
+      usuario
+    );
+    this._router.navigate(['/usuario']);
   }
 }

@@ -9,6 +9,7 @@ import { CapamediaService } from '../../services/capamedia.service';
 })
 export class LoginComponent implements OnInit {
   login: any = {
+    usuario: '',
     registroacademico: '',
     clave: '',
   };
@@ -36,15 +37,17 @@ export class LoginComponent implements OnInit {
         //console.log(res);
         if (res) {
           console.log('login exitoso');
-          console.log(res);
+          //console.log(res);
+          //console.log(Object.values(res)[0]);
+
           this._capamediaService.LSSetValue(
             this._capamediaService.CONST_USUARIO,
-            this.login.registroacademico
+            Object.values(res)[0]
           );
           this._router.navigate(['/publicaciones']);
         }
         //return;
-        console.log('login fallido');
+        //console.log('login fallido');
       },
       (err) => console.log(err)
     );

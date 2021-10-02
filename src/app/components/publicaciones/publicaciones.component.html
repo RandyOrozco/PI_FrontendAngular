@@ -1,7 +1,7 @@
 <navbar></navbar>
 <br>
 <div class="container p-4">
-<div class="col-md-4 offset-md-4" *ngFor="let publicacion of publicaciones">
+<div class="col-md-6 offset-md-3" *ngFor="let publicacion of publicaciones">
   <div class="card text-center">
     <div
       class="
@@ -23,7 +23,7 @@
       <a href="/publicacion/{{publicacion.publicacion}}">{{ publicacion.titulo }}</a>
     </div>
     <div class="card-body">
-      Creado por {{ publicacion.nombreusuario }} {{ publicacion.apellido }} el
+      Creado por <span (click)="verUsuario(publicacion.usuario)" >{{ publicacion.nombreusuario }} {{ publicacion.apellido }}</span> el
       {{ publicacion.fecha | date: "dd/MM/YYYY" }}
     </div>
   </div>

@@ -14,6 +14,7 @@ export class CapamediaService {
 
   public CONST_USUARIO = 'usuario';
   public CONST_PUBLICACION = 'publicacion';
+  public CONST_USUARIO_CONSULTA = 'usuario_consulta';
 
   private API_URI = 'http://127.0.0.1:8080/api';
   constructor(private _http: HttpClient) { }

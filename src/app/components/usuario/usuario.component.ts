@@ -31,10 +31,46 @@ export class UsuarioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._capamediaService.getUsuarioTodo().subscribe(
+    /*this._capamediaService.getUsuarioTodo().subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
+    );*/
+
+    //obteniendo los datos de un usuario consultado
+    this._usuarioActual = this._capamediaService.LSGetValue(
+      this._capamediaService.CONST_USUARIO_CONSULTA
     );
+
+    //comprobando si hay un usuario consultado
+    if (this._usuarioActual) {
+      this.getDatoUsuario();
+      this._capamediaService.LSRemoveValue(this._capamediaService.CONST_USUARIO_CONSULTA);
+      return;
+    } else {
+      this._usuarioActual = '0';
+    }
+
+    //obteniendo los datos del usuario registrado
+    this._usuarioActual = this._capamediaService.LSGetValue(
+      this._capamediaService.CONST_USUARIO
+    );
+    if (this._usuarioActual) {
+      this.getDatoUsuario();
+      /*this._usr.forEach((e: { usuario: any; registroacademico: any; nombre: any; apellido: any; email: any; fecha: any; }) => {
+        this.usuarioActual.usuario = e.usuario;
+        this.usuarioActual.registroacademico = e.registroacademico;
+        this.usuarioActual.nombre = e.nombre;
+        this.usuarioActual.apellido = e.apellido;
+        this.usuarioActual.email = e.email;
+        this.usuarioActual.fecha = e.fecha;
+      });
+      console.log(this._usr);*/
+      
+      console.log(this.usuarioActual);
+      
+    } else {
+      this._usuarioActual = '0';
+    }
   }
 
   crearUsuario() {
@@ -51,21 +87,39 @@ export class UsuarioComponent implements OnInit {
       },
       (err) => console.log(err)
     );
-
-    /*console.log(resultado);
-    if (resultado) {
-      console.log('login exitoso');
-      this._capamediaService.LSSetValue(
-        this._capamediaService.CONST_USUARIO,
-        this.login.registroacademico
-      );
-      this._router.navigate(['/publicaciones']);
-    } else {
-      console.log('login fallido');
-    }*/
   }
 
   cancelar() {
     this._router.navigate(['/']);
+  }
+
+  getDatoUsuario() {
+    //console.log(this._usuarioActual);
+
+    this._capamediaService.getUsuarioUno(this._usuarioActual).subscribe(
+      (res) => {
+        //resultado = res;
+        //console.log(res);
+        if (res) {
+          /*console.log('hola mundo');
+          console.log(res);
+          console.log(Object.values(res));
+          console.log('hola mundo');*/
+          const ol = Object.values(res);
+          ol.forEach(e => {
+            this.usuarioActual.usuario = e.usuario;
+            this.usuarioActual.registroacademico = e.registroacademico;
+            this.usuarioActual.nombre = e.nombre;
+            this.usuarioActual.apellido = e.apellido;
+            this.usuarioActual.email = e.email;
+            this.usuarioActual.fecha = e.fecha;
+            
+          })
+          //console.log(this.usuarioActual);
+          
+        }
+      },
+      (err) => console.log(err)
+    );
   }
 }
