@@ -10,6 +10,7 @@ import { Usuario } from '../../models/usuario';
 })
 export class UsuarioComponent implements OnInit {
   public _usuarioActual: string;
+  public _verBarra: string;
 
   public usuarioActual: any = {
     usuario: '',
@@ -28,6 +29,7 @@ export class UsuarioComponent implements OnInit {
     private _router: Router
   ) {
     this._usuarioActual = '0';
+    this._verBarra = '0';
   }
 
   ngOnInit(): void {
@@ -44,7 +46,9 @@ export class UsuarioComponent implements OnInit {
     //comprobando si hay un usuario consultado
     if (this._usuarioActual) {
       this.getDatoUsuario();
-      this._capamediaService.LSRemoveValue(this._capamediaService.CONST_USUARIO_CONSULTA);
+      this._capamediaService.LSRemoveValue(
+        this._capamediaService.CONST_USUARIO_CONSULTA
+      );
       return;
     } else {
       this._usuarioActual = '0';
@@ -65,9 +69,13 @@ export class UsuarioComponent implements OnInit {
         this.usuarioActual.fecha = e.fecha;
       });
       console.log(this._usr);*/
-      
+
       console.log(this.usuarioActual);
-      
+
+      /* OCULTANDO LA BARRA DE NAVEGACIÓN EN EL COMPONENTE ANIDADO */
+      this._capamediaService.LSSetValue(
+        this._capamediaService.CONST_VER_BARRA, '0'
+      );
     } else {
       this._usuarioActual = '0';
     }
@@ -106,17 +114,15 @@ export class UsuarioComponent implements OnInit {
           console.log(Object.values(res));
           console.log('hola mundo');*/
           const ol = Object.values(res);
-          ol.forEach(e => {
+          ol.forEach((e) => {
             this.usuarioActual.usuario = e.usuario;
             this.usuarioActual.registroacademico = e.registroacademico;
             this.usuarioActual.nombre = e.nombre;
             this.usuarioActual.apellido = e.apellido;
             this.usuarioActual.email = e.email;
             this.usuarioActual.fecha = e.fecha;
-            
-          })
+          });
           //console.log(this.usuarioActual);
-          
         }
       },
       (err) => console.log(err)

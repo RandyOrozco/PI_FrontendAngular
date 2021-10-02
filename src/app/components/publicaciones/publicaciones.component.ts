@@ -5,39 +5,18 @@ import { CapamediaService } from '../../services/capamedia.service';
 @Component({
   selector: 'publicaciones',
   templateUrl: './publicaciones.component.html',
-  styleUrls: ['./publicaciones.component.css']
+  styleUrls: ['./publicaciones.component.css'],
 })
 export class PublicacionesComponent implements OnInit {
-
-  publicaciones: any = [];
-
-  constructor(
-    private _capamediaService: CapamediaService,
-    //private _router: Router,
-    private _route: ActivatedRoute,
-    private _router: Router
-  ) {
-
+  public _usuarioActual: string;
+  constructor(private _capamediaService: CapamediaService) {
+    this._usuarioActual = '0';
   }
 
   ngOnInit(): void {
-    this._capamediaService.getPublicacionTodo().subscribe(
-      res => {
-        //console.log(res);
-        this.publicaciones = res;
-        console.log(this.publicaciones);
-      },
-      err => console.log(err)
-      
-      
+    //obteniendo los datos de un usuario consultado
+    this._usuarioActual = this._capamediaService.LSGetValue(
+      this._capamediaService.CONST_USUARIO_CONSULTA
     );
-  }
-
-  verUsuario(usuario: string){
-    this._capamediaService.LSSetValue(
-      this._capamediaService.CONST_USUARIO_CONSULTA,
-      usuario
-    );
-    this._router.navigate(['/usuario']);
   }
 }

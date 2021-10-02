@@ -13,6 +13,8 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
 import { CapamediaService } from './services/capamedia.service';
 import { PublicacionesComponent } from './components/publicaciones/publicaciones.component';
 import { RouterModule } from '@angular/router';
+import { ComentarioComponent } from './components/comentario/comentario.component';
+import { PubsComponent } from './components/pubs/pubs.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { RouterModule } from '@angular/router';
     NavbarComponent,
     PublicacionComponent,
     UsuarioComponent,
-    PublicacionesComponent
+    PublicacionesComponent,
+    ComentarioComponent,
+    PubsComponent
   ],
   imports: [
     BrowserModule,
