@@ -42,14 +42,14 @@
     <div class="col-md-6 offset-md-3">
         <div class="card">
             <div class="card text-center">
-              <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center " >Registro de Usuario</div>
+              <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center " >Perfil del Usuario</div>
                 <div class="card-body">
                     <p>¡Hola {{usuarioActual.nombre}} {{usuarioActual.apellido}}!</p>
                     <p>Estos son tus detalles:
                     <br>Registro Académico: <strong>{{usuarioActual.registroacademico}}</strong>
                     <br>Nombres: <strong>{{usuarioActual.nombre}}</strong>
                     <br>Apellidos: <strong>{{usuarioActual.apellido}}</strong>
-                    <br>EMail: <strong>{{usuarioActual.email}}</strong>
+                    <br>Correo: <strong>{{usuarioActual.email}}</strong>
                     <br>Fecha de creación: <strong>{{usuarioActual.fecha | date: "dd/MM/YYYY"}}</strong></p>
                     <p>Detalle de Cursos Aprobados:</p>
                     <p></p>
@@ -58,8 +58,9 @@
             </div>
         </div>
     </div>
-    <comentario></comentario>
     <br>
-    <pubs></pubs>
+    <comentario [usuarioConsulta]="_usuarioActual"></comentario>
+    <br>
+    <pubs [usuarioConsulta]="_usuarioActual"></pubs>
 </ng-container>
 </div>

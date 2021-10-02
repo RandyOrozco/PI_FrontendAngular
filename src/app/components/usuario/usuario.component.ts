@@ -49,6 +49,7 @@ export class UsuarioComponent implements OnInit {
       this._capamediaService.LSRemoveValue(
         this._capamediaService.CONST_USUARIO_CONSULTA
       );
+      console.log('se encontro un usuario consulta');
       return;
     } else {
       this._usuarioActual = '0';
@@ -59,6 +60,8 @@ export class UsuarioComponent implements OnInit {
       this._capamediaService.CONST_USUARIO
     );
     if (this._usuarioActual) {
+      console.log('se encontro un usuario');
+      
       this.getDatoUsuario();
       /*this._usr.forEach((e: { usuario: any; registroacademico: any; nombre: any; apellido: any; email: any; fecha: any; }) => {
         this.usuarioActual.usuario = e.usuario;

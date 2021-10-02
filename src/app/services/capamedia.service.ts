@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../models/usuario';
 import { Catedratico } from '../models/catedratico';
+import { Comentario } from '../models/comentario';
 import { Curso } from '../models/curso';
 import { Publicacion } from '../models/publicacion';
 import { Observable } from 'rxjs/Observable';
@@ -66,8 +67,9 @@ export class CapamediaService {
   }
 
   /*PUBLICACION*/
-  getPublicacionTodo() {
-    return this._http.get(`${this.API_URI}/publicacion/todo`);
+  getPublicacionTodo(usuario: string = '0') {
+    const condicion = `usuario=${usuario}`;
+    return this._http.get(`${this.API_URI}/publicacion/todo?${condicion}`);
   }
 
   getPublicacionUno(id: string) {
@@ -126,5 +128,30 @@ export class CapamediaService {
 
   deleteCurso(id: string) {
     return this._http.delete(`${this.API_URI}/curso/${id}`);
+  }
+
+  /*COMENTARIO*/
+  getComentarioTodo(usuario: string, publicacion: string) {
+    //uno?usuario=${id}`
+    const condicion = `usuario=${usuario}&=${publicacion}`;
+    console.log(condicion);
+    
+    return this._http.get(`${this.API_URI}/comentario/todo?${condicion}`);
+  }
+
+  getComentarioUno(id: string) {
+    return this._http.get(`${this.API_URI}/comentario/uno?comentario=${id}`);
+  }
+
+  saveComentario(comentario: Comentario) {
+    return this._http.post(`${this.API_URI}/comentario/`, comentario);
+  }
+
+  updateComentario(id: string, comentario: Comentario): Observable<any> {
+    return this._http.put(`${this.API_URI}/comentario/${id}`, comentario);
+  }
+
+  deleteComentario(id: string) {
+    return this._http.delete(`${this.API_URI}/comentario/${id}`);
   }
 }

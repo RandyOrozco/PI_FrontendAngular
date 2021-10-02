@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CapamediaService } from 'src/app/services/capamedia.service';
 
@@ -11,6 +11,8 @@ export class PubsComponent implements OnInit {
   public _usuarioActual: string;
 
   publicaciones: any = [];
+  
+  @Input() usuarioConsulta: any;
 
   constructor(
     private _capamediaService: CapamediaService,
@@ -22,7 +24,7 @@ export class PubsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._capamediaService.getPublicacionTodo().subscribe(
+    this._capamediaService.getPublicacionTodo(this.usuarioConsulta).subscribe(
       (res) => {
         //console.log(res);
         this.publicaciones = res;
@@ -40,6 +42,10 @@ export class PubsComponent implements OnInit {
   }
 
   verUsuario(usuario: string) {
+    // console.log('hola mundo');
+    // console.log(usuario);
+    // console.log('hola mundo');
+    
     this._capamediaService.LSSetValue(
       this._capamediaService.CONST_USUARIO_CONSULTA,
       usuario
