@@ -52,4 +52,14 @@ export class PubsComponent implements OnInit {
     );
     this._router.navigate(['/usuario']);
   }
+
+  verPublicacion(publicacion: string) {
+    this._capamediaService.LSSetValue(
+      this._capamediaService.CONST_PUBLICACION_CONSULTA,
+      publicacion
+    );
+    console.log(this._capamediaService.LSGetValue(this._capamediaService.CONST_PUBLICACION_CONSULTA));
+    
+    this._router.navigate(['/publicacion']);
+  }
 }

@@ -25,7 +25,7 @@ const routes: Routes = [
     component: PublicacionesComponent,
   },
   {
-    path: 'publicacion/',
+    path: 'publicacion',
     component: PublicacionComponent,
   },
   {

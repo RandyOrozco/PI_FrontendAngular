@@ -13,8 +13,8 @@ import { RESTORED_VIEW_CONTEXT_NAME } from '@angular/compiler/src/render3/view/u
 })
 export class CapamediaService {
   public CONST_USUARIO = 'usuario';
-  public CONST_PUBLICACION = 'publicacion';
   public CONST_USUARIO_CONSULTA = 'usuario_consulta';
+  public CONST_PUBLICACION_CONSULTA = 'publicacion';
   public CONST_VER_BARRA = 'ver_barra';
 
   private API_URI = 'http://127.0.0.1:8080/api';

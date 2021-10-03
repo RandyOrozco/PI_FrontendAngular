@@ -42,7 +42,7 @@ export class ComentarioComponent implements OnInit {
 
     //obteniendo los datos de un post consultado
     this._publicacionActual = this._capamediaService.LSGetValue(
-      this._capamediaService.CONST_PUBLICACION
+      this._capamediaService.CONST_PUBLICACION_CONSULTA
     );
     if (!this._publicacionActual) this._publicacionActual = '0';
 

@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CapamediaService } from '../../services/capamedia.service';
 import { Catedratico } from '../../models/catedratico';
 import { Curso } from '../../models/curso';
 import { Publicacion } from '../../models/publicacion';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpParams } from '@angular/common/http';
-import { Lexer } from '@angular/compiler';
 
 @Component({
   selector: 'publicacion',
@@ -13,6 +11,9 @@ import { Lexer } from '@angular/compiler';
   styleUrls: ['./publicacion.component.css'],
 })
 export class PublicacionComponent implements OnInit {
+  public _usuarioConsulta: string;
+  public _publicacionActual: string;
+
   seleccionadoCatedratico: Catedratico = { catedratico: 0, nombre: 'no se' };
   seleccionadoCurso: Curso = { curso: 0, nombre: 'no se' };
   listaCatedratico: Catedratico[] = [];
@@ -26,13 +27,31 @@ export class PublicacionComponent implements OnInit {
     texto: '',
   };
 
-  pActual: any;
-  publicacionActual: Publicacion = {
-    usuario: 1,
+  //pActual: any;
+  
+  // this.publicacionActual.publicacion = e.publicacion;
+  // this.publicacionActual.usuario = e.usuario;
+  // this.publicacionActual.curso = e.curso;
+  // this.publicacionActual.catedratico = e.catedratico;
+  // this.publicacionActual.fecha = e.fecha;
+  // this.publicacionActual.titulo = e.titulo;
+  // this.publicacionActual.texto = e.texto;
+  // this.publicacionActual.registroacademico = e.registroacademico;
+  // this.publicacionActual.nombreusuario = e.nombreusuario;
+  // this.publicacionActual.apellido = e.apellido;
+  // this.publicacionActual.acercade = e.acercade;
+  publicacionActual: any = {
+    publicacion: 1,
+    usuario: 0,
     curso: 0,
-    catedratico: 0,
-    titulo: '',
-    texto: '',
+    catedratico: '',
+    fecha: '',
+    titulo: 1,
+    texto: 0,
+    registroacademico: 0,
+    nombreusuario: '',
+    apellido: '',
+    acercade: 1,
   };
   resultados: any = [];
 
@@ -41,40 +60,92 @@ export class PublicacionComponent implements OnInit {
     //private _router: Router,
     private _route: ActivatedRoute,
     private _router: Router
-  ) {}
+  ) {
+    this._usuarioConsulta = '0';
+    this._publicacionActual = '0';
+  }
 
   ngOnInit(): void {
+    this._publicacionActual = this._capamediaService.LSGetValue(
+      this._capamediaService.CONST_PUBLICACION_CONSULTA
+    );
     this.getListaCatedratico();
     this.getListaCurso();
     this.getPost();
     //this.pActual = this._route.snapshot.params;
-    
-  }
-  
-  getPost() {
-    this._route.paramMap.subscribe((params) => {
-      this.pActual = JSON.parse(params.get('publicacion') || '');
-      if (this.pActual) {
-        console.log(this.pActual);
-        this._capamediaService.getPublicacionUno(this.pActual).subscribe(
-          res => {
-             this.resultados = res;
-            //console.log(res);
-            //console.log(JSON.parse(JSON.stringify(res)));
-            //console.log(res);
-            //this.publicacionActual.catedratico = JSON.stringify(res).catedratico;
-          },
-          err => {
-            console.log(err);
-          }
-        );
-      } else {
-      }
-    });
   }
 
+  getPost() {
+    //console.log(this._usuarioActual);
+
+    this._capamediaService.getPublicacionUno(this._publicacionActual).subscribe(
+      (res) => {
+        //resultado = res;
+        //console.log(res);
+        if (res) {
+          /*console.log('hola mundo');
+          console.log(res);
+          console.log(Object.values(res));
+          console.log('hola mundo');*/
+          const ol = Object.values(res);
+          ol.forEach((e) => {
+            this.publicacionActual.publicacion = e.publicacion;
+            this.publicacionActual.usuario = e.usuario;
+            this.publicacionActual.curso = e.curso;
+            this.publicacionActual.catedratico = e.catedratico;
+            this.publicacionActual.fecha = e.fecha;
+            this.publicacionActual.titulo = e.titulo;
+            this.publicacionActual.texto = e.texto;
+            this.publicacionActual.registroacademico = e.registroacademico;
+            this.publicacionActual.nombreusuario = e.nombreusuario;
+            this.publicacionActual.apellido = e.apellido;
+            this.publicacionActual.acercade = e.acercade;
+          });
+          //console.log(this.usuarioActual);
+        }
+      },
+      (err) => console.log(err)
+    );
+  }
+
+  // TODO: comentar esto
+  /*getPost() {
+    this._route.paramMap.subscribe((params) => {
+      //this.pActual = JSON.parse(params.get('publicacion') || '');
+      if (this._publicacionActual) {
+        console.log(this._publicacionActual);
+        this._capamediaService
+          .getPublicacionUno(this._publicacionActual)
+          .subscribe(
+            (res) => {
+              this.resultados = res;
+              console.log('hola mundo res');
+              console.log(res);
+              console.log('hola mundo resultados');
+              this.resultados.forEach((e: any) => {
+                console.log(e);
+              });
+              //console.log(JSON.parse(JSON.stringify(res)));
+              //console.log(res);
+              //this.publicacionActual.catedratico = JSON.stringify(res).catedratico;
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
+      } else {
+        this._publicacionActual = '';
+      }
+    });
+    console.log('hola mundo resultados');
+    this.resultados.forEach((e: any) => {
+      console.log(e);
+    });
+
+  }*/
+
   leer() {
-    console.log('hola mundo');
+    //console.log('hola mundo');
 
     console.log(this.resultados);
   }
@@ -102,6 +173,9 @@ export class PublicacionComponent implements OnInit {
   }
 
   savePublicacion() {
+    this.publicacion.usuario = this._capamediaService.LSGetValue(
+      this._capamediaService.CONST_USUARIO
+    );
     console.log(this.publicacion);
     this._capamediaService.savePublicacion(this.publicacion).subscribe(
       (res) => {
