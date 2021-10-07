@@ -133,7 +133,7 @@ export class CapamediaService {
   /*COMENTARIO*/
   getComentarioTodo(usuario: string, publicacion: string) {
     //uno?usuario=${id}`
-    const condicion = `usuario=${usuario}&=${publicacion}`;
+    const condicion = `usuario=${usuario}&publicacion=${publicacion}`;
     console.log(condicion);
     
     return this._http.get(`${this.API_URI}/comentario/todo?${condicion}`);

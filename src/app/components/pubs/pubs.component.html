@@ -3,7 +3,10 @@
   <div class=" card-header bg-clear text-black  d-flex justify-content-between align-items-center" >
     Publicaciones: 
   </div>
-  <div class="card-body">Actualmente hay {{ publicaciones.length }} publicaciones.</div>
+  <div class="card-body">Actualmente hay {{ publicaciones.length }} publicaciones.
+    <br>
+    <span (click)="agregarPublicacion()">Agregar publicación.</span>
+  </div>
 </div>
 <br />
 </div>

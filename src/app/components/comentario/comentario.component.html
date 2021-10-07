@@ -2,11 +2,21 @@
   <!-- <div class=" card-header bg-dark text-white  d-flex justify-content-between align-items-center" *ngIf="comentarios.length > 0">
     Comentarios: {{ comentarios.length }}
   </div> -->
-  <div class="card text-center">
-  <div class=" card-header bg-clear text-black  d-flex justify-content-between align-items-center" >
+  <div class="card text-left">
+  <div class=" card-header bg-clear text-black  d-flex justify-content-between " >
     Comentarios: 
   </div>
-  <div class="card-body">El usuario ha escrito {{ comentarios.length }} comentarios.</div>
+  <span class="card-body text-center">Actualmente hay {{ comentarios.length }} comentarios.</span>
+  <ng-container *ngIf="this.publicacionConsulta != '0'">
+  <span class="card-body text-left">Aporta con tu opinión
+      <form>
+        <div class="form-group">
+            <textarea [(ngModel)]="comentario.texto" type="text" name="texto" placeholder="Texto" class="form-control mt-2" rows="5"></textarea>
+        </div>
+        <button class="btn btn-success col-md-8 offset-md-0 mt-2" (click)="saveComentario()">Comentar</button>
+      </form>
+  </span>
+  </ng-container>
 </div>
 <br />
 </div>

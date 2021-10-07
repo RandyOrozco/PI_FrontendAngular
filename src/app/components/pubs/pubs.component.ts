@@ -62,4 +62,9 @@ export class PubsComponent implements OnInit {
     
     this._router.navigate(['/publicacion']);
   }
+
+  agregarPublicacion(){
+    this._capamediaService.LSRemoveValue(this._capamediaService.CONST_PUBLICACION_CONSULTA);
+    this._router.navigate(['/publicacion']);
+  }
 }

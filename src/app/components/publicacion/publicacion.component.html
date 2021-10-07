@@ -1,10 +1,10 @@
 <!-- <div class="row"> -->
-    <navbar></navbar>
-    <br>
-    <div class="container p-4">
-<div class="col-md-4 offset-md-4">
-    <div class="card">
-        <ng-template [ngIf]="_publicacionActual==''" [ngIfElse]="detallePublicacion">
+<navbar></navbar>
+<br>
+<div class="container p-4">
+    <ng-template [ngIf]="_publicacionActual=='0'" [ngIfElse]="detallePublicacion">
+    <div class="col-md-4 offset-md-4">
+        <div class="card">
             <div class="card text-center">
               <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center " >Nueva Publicación</div>
                 <div class="card-body">
@@ -29,10 +29,14 @@
                     </form>
                 </div>
             </div>
-        </ng-template>
-        <ng-template #detallePublicacion>
+        </div>
+    </div>
+    </ng-template>
+    <ng-template #detallePublicacion>
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
             <div class="card text-left ">
-              <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center text-center " >Publicación existente {{publicacionActual.titulo}}</div>
+              <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center text-center " >Detalles de la Publicación: "{{publicacionActual.titulo}}"</div>
                 <div class="card-body text-left">
                     <p>Autor: <strong>{{publicacionActual.nombreusuario}} {{publicacionActual.apellido}}</strong>
                     <br>Fecha de creación: <strong>{{publicacionActual.fecha | date: "dd/MM/YYYY"}}</strong>
@@ -43,8 +47,10 @@
                 </p>
                 </div>
             </div>
-        </ng-template>
+        </div>
     </div>
-</div>
+    <br>
+    <comentario [publicacionConsulta]="_publicacionActual"></comentario>
+    </ng-template>
 </div>
 <!-- </div> -->

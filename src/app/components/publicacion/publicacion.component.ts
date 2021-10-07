@@ -69,6 +69,7 @@ export class PublicacionComponent implements OnInit {
     this._publicacionActual = this._capamediaService.LSGetValue(
       this._capamediaService.CONST_PUBLICACION_CONSULTA
     );
+    if(!this._publicacionActual) this._publicacionActual = '0';
     this.getListaCatedratico();
     this.getListaCurso();
     this.getPost();
